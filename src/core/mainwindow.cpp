@@ -208,7 +208,7 @@
 #endif
 
 #include "smartplaylists/smartplaylistsviewcontainer.h"
-
+#include "miniplayer/miniplayer.h"
 #include "organize/organizeerrordialog.h"
 
 #ifdef Q_OS_WIN32
@@ -409,6 +409,10 @@ MainWindow::MainWindow(Application *app,
 
   // Initialize the UI
   ui_->setupUi(this);
+
+  // Mini player
+  QAction *action_miniplayer = ui_->menu_music->addAction(tr("Mini Player"), this, &MainWindow::ToggleMiniPlayer);
+  action_miniplayer->setCheckable(true);
 
   if (QGuiApplication::platformName() != "wayland"_L1) {
     setWindowIcon(IconLoader::Load(u"strawberry"_s));
@@ -1716,6 +1720,18 @@ void MainWindow::ToggleShowHide() {
 
 void MainWindow::ToggleHide() {
   if (isVisible()) SetHiddenInTray(true);
+}
+
+void MainWindow::ToggleMiniPlayer() {
+  if (!app_->miniplayer()) {
+    return;
+  }
+
+  if (app_->miniplayer_->isVisible()) {
+    app_->miniplayer_->hide();
+  } else {
+    app_->miniplayer_->show();
+  }
 }
 
 void MainWindow::StopAfterCurrent() {

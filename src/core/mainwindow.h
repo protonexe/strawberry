@@ -248,6 +248,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void HandleNotificationPreview(const OSDSettings::Type type, const QString &line1, const QString &line2);
 
   void ShowConsole();
+  void ToggleMiniPlayer();
+
 
   void LoadCoverFromFile();
   void SaveCoverToFile();
@@ -357,6 +359,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   LastFMImportDialog *lastfm_import_dialog_;
 
+  SharedPtr<MiniPlayer> miniplayer_;
   QAction *collection_show_all_;
   QAction *collection_show_duplicates_;
   QAction *collection_show_untagged_;

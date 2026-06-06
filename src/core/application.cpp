@@ -109,6 +109,7 @@
 
 #include "radios/radioservices.h"
 #include "radios/radiobackend.h"
+#include "miniplayer/miniplayer.h"
 
 using std::make_shared;
 using namespace std::chrono_literals;
@@ -212,6 +213,7 @@ class ApplicationImpl {
         moodbar_controller_([app]() { return new MoodbarController(app->player(), app->moodbar_loader()); }),
 #endif
         lastfm_import_([app]() { return new LastFMImport(app->network()); })
+        miniplayer_([app]() { return new MiniPlayer(app); })
   {}
 
   Lazy<TagReaderClient> tagreader_client_;
@@ -237,6 +239,8 @@ class ApplicationImpl {
   Lazy<MoodbarController> moodbar_controller_;
 #endif
   Lazy<LastFMImport> lastfm_import_;
+  Lazy<MiniPlayer> miniplayer_;
+
 
 };
 
@@ -380,6 +384,7 @@ SharedPtr<StreamingServices> Application::streaming_services() const { return p_
 SharedPtr<RadioServices> Application::radio_services() const { return p_->radio_services_.ptr(); }
 SharedPtr<AudioScrobbler> Application::scrobbler() const { return p_->scrobbler_.ptr(); }
 SharedPtr<LastFMImport> Application::lastfm_import() const { return p_->lastfm_import_.ptr(); }
+SharedPtr<MiniPlayer> Application::miniplayer() const { return p_->miniplayer_.ptr(); }
 #ifdef HAVE_MOODBAR
 SharedPtr<MoodbarController> Application::moodbar_controller() const { return p_->moodbar_controller_.ptr(); }
 SharedPtr<MoodbarLoader> Application::moodbar_loader() const { return p_->moodbar_loader_.ptr(); }
