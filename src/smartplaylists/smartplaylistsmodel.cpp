@@ -69,6 +69,62 @@ void SmartPlaylistsModel::Init() {
               SmartPlaylistSearchTerm::Field::DateCreated)
             )
           )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Recently added (7 days)")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::DateCreated, SmartPlaylistSearchTerm::Operator::NumericDate, 7),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::DateCreated)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Recently added (30 days)")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::DateCreated, SmartPlaylistSearchTerm::Operator::NumericDate, 30),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::DateCreated)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Recently added (90 days)")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::DateCreated, SmartPlaylistSearchTerm::Operator::NumericDate, 90),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::DateCreated)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Recently played (7 days)")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::LastPlayed, SmartPlaylistSearchTerm::Operator::NumericDate, 7),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::LastPlayed)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Recently played (30 days)")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::LastPlayed, SmartPlaylistSearchTerm::Operator::NumericDate, 30),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::LastPlayed)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "5★ tracks")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::Rating, SmartPlaylistSearchTerm::Operator::GreaterThan, 4.5),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::Rating)
+            )
+          )
+          << PlaylistGeneratorPtr(
+              new PlaylistQueryGenerator(
+              QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "Unrated")),
+              SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList() << SmartPlaylistSearchTerm(SmartPlaylistSearchTerm::Field::Rating, SmartPlaylistSearchTerm::Operator::Equals, -1.0),
+              SmartPlaylistSearch::SortType::FieldDesc,
+              SmartPlaylistSearchTerm::Field::Rating)
+            )
+          )
           << PlaylistGeneratorPtr(new PlaylistQueryGenerator(
               QStringLiteral(QT_TRANSLATE_NOOP("SmartPlaylists", "50 random tracks")),
               SmartPlaylistSearch(SmartPlaylistSearch::SearchType::All, SmartPlaylistSearch::TermList(), SmartPlaylistSearch::SortType::Random, SmartPlaylistSearchTerm::Field::Title, 50)
