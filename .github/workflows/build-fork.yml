@@ -163,27 +163,27 @@ jobs:
       - name: Copy Qt platform plugins
         shell: cmd
         working-directory: build
-        run: copy ${{env.prefix_path_forwardslash}}\plugins\platforms\qwindows*.dll .\platforms\
+        run: copy ${{env.prefix_path_backslash}}\plugins\platforms\qwindows*.dll .\platforms\
 
       - name: Copy Qt styles
         shell: cmd
         working-directory: build
-        run: copy ${{env.prefix_path_forwardslash}}\plugins\styles\qmodernwindowsstyle*.dll .\styles\
+        run: copy ${{env.prefix_path_backslash}}\plugins\styles\qmodernwindowsstyle*.dll .\styles\
 
       - name: Copy Qt TLS plugins
         shell: cmd
         working-directory: build
-        run: copy ${{env.prefix_path_forwardslash}}\plugins\tls\*.dll .\tls\
+        run: copy ${{env.prefix_path_backslash}}\plugins\tls\*.dll .\tls\
 
       - name: Copy Qt SQL drivers
         shell: cmd
         working-directory: build
-        run: copy ${{env.prefix_path_forwardslash}}\plugins\sqldrivers\qsqlite*.dll .\sqldrivers\
+        run: copy ${{env.prefix_path_backslash}}\plugins\sqldrivers\qsqlite*.dll .\sqldrivers\
 
       - name: Copy Qt imageformats plugins
         shell: cmd
         working-directory: build
-        run: copy ${{env.prefix_path_forwardslash}}\plugins\imageformats\*.dll .\imageformats\
+        run: copy ${{env.prefix_path_backslash}}\plugins\imageformats\*.dll .\imageformats\
 
       - name: Copy gstreamer plugins
         shell: cmd
