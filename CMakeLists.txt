@@ -696,6 +696,8 @@ set(SOURCES
   src/lyrics/letraslyricsprovider.cpp
   src/lyrics/lrcliblyricsprovider.cpp
 
+  src/miniplayer/miniplayer.cpp
+
   src/settings/settingsdialog.cpp
   src/settings/settingspage.cpp
   src/settings/settingsitemdelegate.cpp
@@ -995,6 +997,8 @@ set(HEADERS
   src/lyrics/elyricsnetlyricsprovider.h
   src/lyrics/letraslyricsprovider.h
   src/lyrics/lrcliblyricsprovider.h
+
+  src/miniplayer/miniplayer.h
 
   src/settings/settingsdialog.h
   src/settings/settingspage.h
