@@ -1727,10 +1727,10 @@ void MainWindow::ToggleMiniPlayer() {
     return;
   }
 
-  if (app_->miniplayer_->isVisible()) {
-    app_->miniplayer_->hide();
+  if (app_->miniplayer()->isVisible()) {
+    app_->miniplayer()->hide();
   } else {
-    app_->miniplayer_->show();
+    app_->miniplayer()->show();
   }
 }
 

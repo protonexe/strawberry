@@ -359,7 +359,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   LastFMImportDialog *lastfm_import_dialog_;
 
-  SharedPtr<MiniPlayer> miniplayer_;
   QAction *collection_show_all_;
   QAction *collection_show_duplicates_;
   QAction *collection_show_untagged_;
