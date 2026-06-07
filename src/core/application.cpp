@@ -212,7 +212,7 @@ class ApplicationImpl {
         moodbar_loader_([app]() { return new MoodbarLoader(app); }),
         moodbar_controller_([app]() { return new MoodbarController(app->player(), app->moodbar_loader()); }),
 #endif
-        lastfm_import_([app]() { return new LastFMImport(app->network()); })
+        lastfm_import_([app]() { return new LastFMImport(app->network()); }),
         miniplayer_([app]() { return new MiniPlayer(app); })
   {}
 

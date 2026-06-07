@@ -42,7 +42,7 @@ class MiniPlayer : public QWidget {
 
   void SetAlwaysOnTop(const bool enabled);
 
- private slots:
+  private:
   void PlayPause();
   void Next();
   void Previous();
