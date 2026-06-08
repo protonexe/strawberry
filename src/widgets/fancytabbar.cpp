@@ -176,44 +176,27 @@ void FancyTabBar::paintEvent(QPaintEvent *pe) {
     const bool selected = tabWidget->currentIndex() == index;
     QRect tabrect = tabRect(index);
     QRect selectionRect = tabrect;
+
+    // Material Design: selected tab gets a rounded pill highlight
     if (selected) {
-      // Selection highlight
       p.save();
-      QLinearGradient grad(selectionRect.topLeft(), selectionRect.topRight());
-      grad.setColorAt(0, QColor(255, 255, 255, 140));
-      grad.setColorAt(1, QColor(255, 255, 255, 210));
-      p.fillRect(selectionRect.adjusted(0, 0, 0, -1), grad);
+      QRect pillRect = selectionRect.adjusted(4, 4, -4, -4);
+      p.setPen(Qt::NoPen);
+      p.setBrush(QColor(137, 180, 250, 30));
+      p.drawRoundedRect(pillRect, 10, 10);
+      // Left accent bar
+      p.setBrush(QColor(137, 180, 250));
+      p.drawRoundedRect(QRect(selectionRect.left() + 1, selectionRect.center().y() - 12, 3, 24), 2, 2);
       p.restore();
-
-      // shadow lines
-      p.setPen(QColor(0, 0, 0, 110));
-      p.drawLine(selectionRect.topLeft()    + QPoint(1, -1), selectionRect.topRight()    - QPoint(0, 1));
-      p.drawLine(selectionRect.bottomLeft(), selectionRect.bottomRight());
-      p.setPen(QColor(0, 0, 0, 40));
-      p.drawLine(selectionRect.topLeft(),    selectionRect.bottomLeft());
-
-      // highlights
-      p.setPen(QColor(255, 255, 255, 50));
-      p.drawLine(selectionRect.topLeft()    + QPoint(0, -2), selectionRect.topRight()    - QPoint(0, 2));
-      p.drawLine(selectionRect.bottomLeft() + QPoint(0, 1),  selectionRect.bottomRight() + QPoint(0, 1));
-      p.setPen(QColor(255, 255, 255, 40));
-      p.drawLine(selectionRect.topLeft()    + QPoint(0, 0),  selectionRect.topRight());
-      p.drawLine(selectionRect.topRight()   + QPoint(0, 1),  selectionRect.bottomRight() - QPoint(0, 1));
-      p.drawLine(selectionRect.bottomLeft() + QPoint(0, -1), selectionRect.bottomRight() - QPoint(0, 1));
-
     }
 
-    // Mouse hover effect
+    // Material Design: hover effect with subtle highlight
     if (!selected && index == mouseHoverTabIndex && isTabEnabled(index)) {
       p.save();
-      QLinearGradient grad(selectionRect.topLeft(),  selectionRect.topRight());
-      grad.setColorAt(0, Qt::transparent);
-      grad.setColorAt(0.5, QColor(255, 255, 255, 40));
-      grad.setColorAt(1, Qt::transparent);
-      p.fillRect(selectionRect, grad);
-      p.setPen(QPen(grad, 1.0));
-      p.drawLine(selectionRect.topLeft(),     selectionRect.topRight());
-      p.drawLine(selectionRect.bottomRight(), selectionRect.bottomLeft());
+      QRect hoverRect = selectionRect.adjusted(4, 4, -4, -4);
+      p.setPen(Qt::NoPen);
+      p.setBrush(QColor(255, 255, 255, 15));
+      p.drawRoundedRect(hoverRect, 10, 10);
       p.restore();
     }
 
@@ -251,34 +234,26 @@ void FancyTabBar::paintEvent(QPaintEvent *pe) {
 
       p.setTransform(m);
 
-      QFont boldFont(p.font());
-      boldFont.setBold(true);
-      p.setFont(boldFont);
+      QFont font(p.font());
+      font.setBold(selected);
+      font.setPointSizeF(selected ? font.pointSizeF() + 0.5 : font.pointSizeF());
+      p.setFont(font);
 
-      // Text drop shadow color
-      p.setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
-      p.translate(0, 3);
+      // Text foreground color (Material Design colors, no drop shadow)
+      p.setPen(selected ? QColor(205, 214, 244) : QColor(166, 173, 200));
       p.drawText(tabrectText, textFlags, TabText(index));
-
-      // Text foreground color
-      p.translate(0, -1);
-      p.setPen(selected ? QColor(60, 60, 60) : StyleHelper::panelTextColor());
-      p.drawText(tabrectText, textFlags, TabText(index));
-
 
       // Draw the icon
       QRect tabrectIcon;
       if (vertical_text_tabs) {
         tabrectIcon = tabrectLabel;
         tabrectIcon.setSize(QSize(tabWidget->iconsize_smallsidebar(), tabWidget->iconsize_smallsidebar()));
-        // Center the icon
         const int moveRight = (QTabBar::width() - tabWidget->iconsize_smallsidebar()) / 2;
         tabrectIcon.translate(5, moveRight);
       }
       else {
         tabrectIcon = tabrectLabel;
         tabrectIcon.setSize(QSize(tabWidget->iconsize_largesidebar(), tabWidget->iconsize_largesidebar()));
-        // Center the icon
         const int moveRight = (QTabBar::width() - tabWidget->iconsize_largesidebar() - 1) / 2;
 
         if (tabWidget->mode() == FancyTabWidget::Mode::IconsSidebar) {

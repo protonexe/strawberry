@@ -117,7 +117,7 @@ PlayingWidget::PlayingWidget(QWidget *parent)
   details_->setUndoRedoEnabled(false);
   // add placeholder text to get the correct height
   if (mode_ == Mode::LargeSongDetails) {
-    details_->setDefaultStyleSheet(u"p { font-size: small; font-weight: bold; }"_s);
+    details_->setDefaultStyleSheet(u"p { font-size: small; font-weight: bold; color: #cdd6f4; }"_s);
     details_->setHtml(u"<p align=center><i></i><br/><br/></p>"_s);
   }
 

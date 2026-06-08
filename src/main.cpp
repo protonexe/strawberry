@@ -236,6 +236,25 @@ int main(int argc, char *argv[]) {
       QApplication::setStyle(style);
     }
     if (QApplication::style()) qLog(Debug) << "Style:" << QApplication::style()->objectName();
+
+    // Material Design dark palette
+    QPalette darkPalette;
+    darkPalette.setColor(QPalette::Window, QColor(30, 30, 46));
+    darkPalette.setColor(QPalette::WindowText, QColor(205, 214, 244));
+    darkPalette.setColor(QPalette::Base, QColor(30, 30, 46));
+    darkPalette.setColor(QPalette::AlternateBase, QColor(24, 24, 37));
+    darkPalette.setColor(QPalette::ToolTipBase, QColor(49, 50, 68));
+    darkPalette.setColor(QPalette::ToolTipText, QColor(205, 214, 244));
+    darkPalette.setColor(QPalette::Text, QColor(205, 214, 244));
+    darkPalette.setColor(QPalette::Button, QColor(49, 50, 68));
+    darkPalette.setColor(QPalette::ButtonText, QColor(205, 214, 244));
+    darkPalette.setColor(QPalette::BrightText, QColor(243, 139, 168));
+    darkPalette.setColor(QPalette::Link, QColor(137, 180, 250));
+    darkPalette.setColor(QPalette::Highlight, QColor(137, 180, 250));
+    darkPalette.setColor(QPalette::HighlightedText, QColor(30, 30, 46));
+    darkPalette.setColor(QPalette::Disabled, QPalette::Text, QColor(88, 91, 112));
+    darkPalette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor(88, 91, 112));
+    QApplication::setPalette(darkPalette);
   }
 
   // Set the permissions on the config file on Unix - it can contain passwords for streaming services, so it's important that other users can't read it.

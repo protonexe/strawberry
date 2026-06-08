@@ -42,7 +42,7 @@ QT_END_NAMESPACE
 namespace Utils {
 class StyleHelper {
  public:
-  static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
+  static const unsigned int DEFAULT_BASE_COLOR = 0x89b4fa;
   static const int progressFadeAnimationDuration = 600;
 
   // Height of the project explorer navigation bar
@@ -62,8 +62,8 @@ class StyleHelper {
   static QColor mergedColors(const QColor &colorA, const QColor &colorB, int factor = 50);
   static QColor alphaBlendedColors(const QColor &colorA, const QColor &colorB);
 
-  static QColor sidebarHighlight() { return QColor(255, 255, 255, 40); }
-  static QColor sidebarShadow() { return QColor(0, 0, 0, 40); }
+  static QColor sidebarHighlight() { return QColor(255, 255, 255, 20); }
+  static QColor sidebarShadow() { return QColor(0, 0, 0, 20); }
 
   static QColor toolBarDropShadowColor() { return QColor(0, 0, 0, 70); }
 

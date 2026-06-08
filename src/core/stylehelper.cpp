@@ -85,7 +85,7 @@ qreal StyleHelper::sidebarFontSize() {
 #ifdef Q_OS_MACOS
   return 10;
 #else
-  return 7.5;
+  return 8.5;
 #endif
 }
 
@@ -177,21 +177,9 @@ void StyleHelper::setBaseColor(const QColor &newcolor) {
 }
 
 static void verticalGradientHelper(QPainter *p, const QRect spanRect, const QRect rect, bool lightColored) {
-
-  QColor highlight = StyleHelper::highlightColor(lightColored);
-  QColor shadow = StyleHelper::shadowColor(lightColored);
-  QLinearGradient grad(spanRect.topRight(), spanRect.topLeft());
-  grad.setColorAt(0, highlight.lighter(117));
-  grad.setColorAt(1, shadow.darker(109));
-  p->fillRect(rect, grad);
-
-  QColor light(255, 255, 255, 80);
-  p->setPen(light);
-  p->drawLine(rect.topRight() - QPoint(1, 0), rect.bottomRight() - QPoint(1, 0));
-  QColor dark(0, 0, 0, 90);
-  p->setPen(dark);
-  p->drawLine(rect.topLeft(), rect.bottomLeft());
-
+  Q_UNUSED(lightColored);
+  // Material Design: flat dark surface
+  p->fillRect(rect, QColor(30, 30, 46));
 }
 
 void StyleHelper::verticalGradient(QPainter *painter, const QRect spanRect, const QRect clipRect, bool lightColored) {
@@ -218,36 +206,10 @@ void StyleHelper::verticalGradient(QPainter *painter, const QRect spanRect, cons
 }
 
 static void horizontalGradientHelper(QPainter *p, const QRect spanRect, const QRect rect, bool lightColored) {
-
-  if (lightColored) {
-    QLinearGradient shadowGradient(rect.topLeft(), rect.bottomLeft());
-    shadowGradient.setColorAt(0, 0xf0f0f0);
-    shadowGradient.setColorAt(1, 0xcfcfcf);
-    p->fillRect(rect, shadowGradient);
-    return;
-  }
-
-  QColor base = StyleHelper::baseColor(lightColored);
-  QColor highlight = StyleHelper::highlightColor(lightColored);
-  QColor shadow = StyleHelper::shadowColor(lightColored);
-  QLinearGradient grad(rect.topLeft(), rect.bottomLeft());
-  grad.setColorAt(0, highlight.lighter(120));
-  if (rect.height() == StyleHelper::navigationWidgetHeight()) {
-    grad.setColorAt(0.4, highlight);
-    grad.setColorAt(0.401, base);
-  }
-  grad.setColorAt(1, shadow);
-  p->fillRect(rect, grad);
-
-  QLinearGradient shadowGradient(spanRect.topLeft(), spanRect.topRight());
-  shadowGradient.setColorAt(0, QColor(0, 0, 0, 30));
-  QColor lighterHighlight;
-  lighterHighlight = highlight.lighter(130);
-  lighterHighlight.setAlpha(100);
-  shadowGradient.setColorAt(0.7, lighterHighlight);
-  shadowGradient.setColorAt(1, QColor(0, 0, 0, 40));
-  p->fillRect(rect, shadowGradient);
-
+  Q_UNUSED(spanRect);
+  Q_UNUSED(lightColored);
+  // Material Design: flat dark surface
+  p->fillRect(rect, QColor(30, 30, 46));
 }
 
 void StyleHelper::horizontalGradient(QPainter *painter, const QRect spanRect, const QRect clipRect, bool lightColored) {
@@ -274,13 +236,9 @@ void StyleHelper::horizontalGradient(QPainter *painter, const QRect spanRect, co
 }
 
 static void menuGradientHelper(QPainter *p, const QRect spanRect, const QRect rect) {
-
-  QLinearGradient grad(spanRect.topLeft(), spanRect.bottomLeft());
-  QColor menuColor = StyleHelper::mergedColors(StyleHelper::baseColor(), QColor(244, 244, 244), 25);
-  grad.setColorAt(0, menuColor.lighter(112));
-  grad.setColorAt(1, menuColor);
-  p->fillRect(rect, grad);
-
+  Q_UNUSED(spanRect);
+  // Material Design: flat dark menu background
+  p->fillRect(rect, QColor(30, 30, 46));
 }
 
 void StyleHelper::drawArrow(QStyle::PrimitiveElement element, QPainter *painter, const QStyleOption *option) {
@@ -436,14 +394,10 @@ void StyleHelper::tintImage(QImage &img, const QColor &tintColor) {
 }
 
 QLinearGradient StyleHelper::statusBarGradient(const QRect statusBarRect) {
-
   QLinearGradient grad(statusBarRect.topLeft(), QPoint(statusBarRect.center().x(), statusBarRect.bottom()));
-  QColor startColor = shadowColor().darker(164);
-  QColor endColor = baseColor().darker(130);
-  grad.setColorAt(0, startColor);
-  grad.setColorAt(1, endColor);
+  grad.setColorAt(0, QColor(24, 24, 37));
+  grad.setColorAt(1, QColor(24, 24, 37));
   return grad;
-
 }
 
 QString StyleHelper::dpiSpecificImageFile(const QString &fileName) {

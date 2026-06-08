@@ -320,50 +320,12 @@ void FancyTabWidget::paintEvent(QPaintEvent *pe) {
 
     pixmap = QPixmap(backgroundRect.size());
     QPainter p(&pixmap);
-    p.fillRect(backgroundRect, bg_color_);
 
-    // Draw the gradient fill.
-    if (bg_gradient_) {
+    // Material Design: flat dark surface, no gradient
+    p.fillRect(backgroundRect, QColor(24, 24, 37));
 
-      QRect rect(0, 0, backgroundRect.width(), backgroundRect.height());
-
-      QColor shadow = StyleHelper::shadowColor(false);
-      QLinearGradient grad(backgroundRect.topRight(), backgroundRect.topLeft());
-      grad.setColorAt(0, bg_color_.lighter(117));
-      grad.setColorAt(1, shadow.darker(109));
-      p.fillRect(rect, grad);
-
-      QColor light(255, 255, 255, 80);
-      p.setPen(light);
-      p.drawLine(rect.topRight() - QPoint(1, 0), rect.bottomRight() - QPoint(1, 0));
-      QColor dark(0, 0, 0, 90);
-      p.setPen(dark);
-      p.drawLine(rect.topLeft(), rect.bottomLeft());
-
-    }
-
-    // Draw the translucent png graphics over the gradient fill
-    if (!background_pixmap_.isNull()) {
-      QRect pixmap_rect(background_pixmap_.rect());
-      pixmap_rect.moveTo(backgroundRect.topLeft());
-
-      while (pixmap_rect.top() < backgroundRect.bottom()) {
-        QRect source_rect(pixmap_rect.intersected(backgroundRect));
-        source_rect.moveTo(0, 0);
-        p.drawPixmap(pixmap_rect.topLeft(), background_pixmap_, source_rect);
-        pixmap_rect.moveTop(pixmap_rect.bottom() - 10);
-      }
-    }
-
-    // Shadow effect of the background
-    QColor light(255, 255, 255, 80);
-    p.setPen(light);
-    p.drawLine(backgroundRect.topRight() - QPoint(1, 0), backgroundRect.bottomRight() - QPoint(1, 0));
-    QColor dark(0, 0, 0, 90);
-    p.setPen(dark);
-    p.drawLine(backgroundRect.topLeft(), backgroundRect.bottomLeft());
-
-    p.setPen(StyleHelper::borderColor());
+    // Subtle right border
+    p.setPen(QColor(49, 50, 68));
     p.drawLine(backgroundRect.topRight(), backgroundRect.bottomRight());
 
     p.end();
@@ -414,11 +376,5 @@ void FancyTabWidget::contextMenuEvent(QContextMenuEvent *e) {
 }
 
 QColor FancyTabWidget::DefaultTabbarBgColor() {
-
-  QColor color = StyleHelper::highlightColor();
-  if (Utilities::IsColorDark(color)) {
-    color = color.lighter(130);
-  }
-  return color;
-
+  return QColor(24, 24, 37);
 }
